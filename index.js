@@ -41,10 +41,12 @@ const fetchContent = ($, contentElement) => {
       files.push({
         fileName: $(element)
           .find(".instancename")
-          .text(),
+          .html()
+          .split("<")[0],
         fileType: $(element)
-          .find("img")
-          .attr("role"),
+          .find(".accesshide")
+          .text()
+          .trim(),
         link: $(element)
           .find("a")
           .attr("href")
@@ -91,6 +93,11 @@ const updateCourses = $ => {
 
 exports.login = async (username, password) => {
   const $ = await req(baseURL + "/login/", { username, password }, "POST");
+
+  if ($(".loginerrors").length > 0) {
+    throw new Error("Login failed");
+  }
+
   updateProfile($);
   updateCourses($);
 };
