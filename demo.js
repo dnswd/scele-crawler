@@ -1,4 +1,4 @@
-const sceleCsCrawler = require("./index");
+const sceleCrawler = require("./index");
 
 const main = async () => {
   const argv = require("minimist")(process.argv.slice(2));
@@ -13,19 +13,19 @@ const main = async () => {
     throw new Error("password required");
   }
 
-  await sceleCsCrawler.login(username, password);
+  await sceleCrawler.login(username, password);
 
   console.log("=== PROFILE ===");
-  console.log(sceleCsCrawler.getProfile().npm);
-  console.log(sceleCsCrawler.getProfile().fullName);
-  console.log(sceleCsCrawler.getProfile().nickName);
+  const profile = sceleCrawler.getProfile();
+  console.log(profile.npm);
+  console.log(profile.fullName);
+  console.log(profile.nickName);
 
   console.log("=== COURSES ===");
-  sceleCsCrawler
-    .getCourses()
-    .forEach(course =>
-      console.log(course.longTitle + " (" + course.shortTitle + ")")
-    );
+  const courses = sceleCrawler.getCourses();
+  courses.forEach(course =>
+    console.log(course.longTitle + " (" + course.shortTitle + ")")
+  );
 };
 
 main();
