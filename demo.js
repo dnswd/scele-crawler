@@ -1,4 +1,5 @@
 const sceleCrawler = require("./index");
+const c = require("chalk");
 
 const main = async () => {
   const argv = require("minimist")(process.argv.slice(2));
@@ -26,6 +27,26 @@ const main = async () => {
   courses.forEach(course =>
     console.log(course.longTitle + " (" + course.shortTitle + ")")
   );
+
+  console.log("=== FETCH INFO ===");
+  const courseInfo = await courses[0].fetchInfo();
+  Object.keys(courseInfo).forEach(title => {
+    console.log(c.bgCyan.black(title));
+
+    const content = courseInfo[title];
+
+    if (content.announcement) {
+      console.log("- announcement:");
+      console.log(c.yellow(content.announcement));
+    }
+
+    if (content.files.length > 0) {
+      content.files.forEach(file => {
+        console.log("> " + c.green(file.fileName) + " (" + file.fileType + ")");
+        console.log("  " + file.link);
+      });
+    }
+  });
 };
 
 main();

@@ -11,7 +11,7 @@ const req = (url, body, method) => {
   return new Promise((resolve, reject) => {
     const payload = {
       method: method || "GET",
-      url: baseURL + url,
+      url: url,
       followAllRedirects: true,
       jar: cookies,
       form: body || undefined
@@ -33,6 +33,50 @@ const updateProfile = $ => {
   profile.nickName = userText.split(profile.npm + " ")[1];
 };
 
+const fetchContent = ($, contentElement) => {
+  files = [];
+  $(contentElement)
+    .find(".activityinstance")
+    .each((_, element) => {
+      files.push({
+        fileName: $(element)
+          .find(".instancename")
+          .text(),
+        fileType: $(element)
+          .find("img")
+          .attr("role"),
+        link: $(element)
+          .find("a")
+          .attr("href")
+      });
+    });
+
+  announcement = $(contentElement)
+    .find(".summary")
+    .text();
+
+  return { files, announcement };
+};
+
+const openCourse = link => {
+  return async () => {
+    const section = {};
+
+    const $ = await req(link);
+    const sectionSelector = ".course-content .content";
+
+    $(sectionSelector).each((_, element) => {
+      const title = $(element)
+        .find(".sectionname")
+        .text();
+
+      section[title] = fetchContent($, element);
+    });
+
+    return section;
+  };
+};
+
 const updateCourses = $ => {
   const selector =
     "#wrapper > header.navbar > nav > div > div > ul:nth-child(1) > li:nth-child(5) > ul > li > a";
@@ -41,13 +85,14 @@ const updateCourses = $ => {
     courses.push({
       link: $(element).attr("href"),
       longTitle: $(element).attr("title"),
-      shortTitle: $(element).html()
+      shortTitle: $(element).html(),
+      fetchInfo: openCourse($(element).attr("href"))
     });
   });
 };
 
 exports.login = async (username, password) => {
-  const $ = await req("/login/", { username, password }, "POST");
+  const $ = await req(baseURL + "/login/", { username, password }, "POST");
   updateProfile($);
   updateCourses($);
 };

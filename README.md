@@ -41,3 +41,31 @@ courses.forEach(course => {
     console.log(course.shortTitle);
 });
 ```
+
+### Fetch Course Detail
+```js
+const courseInfo = await courses[0].fetchInfo();
+```
+
+![Screenshot](documentation/section.png)
+
+### Title
+```js
+Object.keys(courseInfo).forEach(title => {
+    console.log(title);
+});
+```
+
+### Announcement
+```js
+console.log(courseInfo[title].announcement);
+```
+
+### Files
+```js
+courseInfo[title].files.forEach(file => {
+    console.log(file.fileName)
+    console.log(file.fileType);
+    console.log(file.link);
+});
+```

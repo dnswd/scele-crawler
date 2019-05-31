@@ -4,9 +4,16 @@
   "description": "crawler for scele.cs.ui.ac.id",
   "main": "index.js",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/scele-crawler/scele-crawler"
+  },
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
     "minimist": "^1.2.0",
     "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "chalk": "^2.4.2"
   }
 }
