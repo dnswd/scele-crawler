@@ -12,6 +12,14 @@ const courseDetail = fs.readFileSync("mock/course-detail.html");
 
 let courses = null;
 
+it("throw error when access broken link", async () => {
+  nock("https://scele.cs.ui.ac.id")
+    .post("/login/", { username: "abc", password: "def" })
+    .reply(404);
+
+  await expect(sceleCrawler.login("abc", "def")).to.be.rejected;
+});
+
 it("throw error when login failed", async () => {
   nock("https://scele.cs.ui.ac.id")
     .post("/login/", { username: "abc", password: "def" })
