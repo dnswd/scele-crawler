@@ -41,10 +41,12 @@ const fetchContent = ($, contentElement) => {
       files.push({
         fileName: $(element)
           .find(".instancename")
-          .text(),
+          .html()
+          .split("<")[0],
         fileType: $(element)
-          .find("img")
-          .attr("role"),
+          .find(".accesshide")
+          .text()
+          .trim(),
         link: $(element)
           .find("a")
           .attr("href")
@@ -58,23 +60,21 @@ const fetchContent = ($, contentElement) => {
   return { files, announcement };
 };
 
-const openCourse = link => {
-  return async () => {
-    const section = {};
+const fetchInfo = async link => {
+  const section = {};
 
-    const $ = await req(link);
-    const sectionSelector = ".course-content .content";
+  const $ = await req(link);
+  const sectionSelector = ".course-content .content";
 
-    $(sectionSelector).each((_, element) => {
-      const title = $(element)
-        .find(".sectionname")
-        .text();
+  $(sectionSelector).each((_, element) => {
+    const title = $(element)
+      .find(".sectionname")
+      .text();
 
-      section[title] = fetchContent($, element);
-    });
+    section[title] = fetchContent($, element);
+  });
 
-    return section;
-  };
+  return section;
 };
 
 const updateCourses = $ => {
@@ -86,13 +86,18 @@ const updateCourses = $ => {
       link: $(element).attr("href"),
       longTitle: $(element).attr("title"),
       shortTitle: $(element).html(),
-      fetchInfo: openCourse($(element).attr("href"))
+      fetchInfo: () => fetchInfo($(element).attr("href"))
     });
   });
 };
 
 exports.login = async (username, password) => {
   const $ = await req(baseURL + "/login/", { username, password }, "POST");
+
+  if ($(".loginerrors").length > 0) {
+    throw new Error("Login failed");
+  }
+
   updateProfile($);
   updateCourses($);
 };

@@ -1,6 +1,6 @@
 {
   "name": "scele-crawler",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "crawler for scele.cs.ui.ac.id",
   "main": "index.js",
   "license": "MIT",
@@ -8,12 +8,26 @@
     "type": "git",
     "url": "https://github.com/scele-crawler/scele-crawler"
   },
+  "scripts": {
+    "test": "nyc mocha test.js"
+  },
+  "nyc": {
+    "include": [
+      "index.js"
+    ]
+  },
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
     "minimist": "^1.2.0",
     "request": "^2.88.0"
   },
   "devDependencies": {
-    "chalk": "^2.4.2"
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "chalk": "^2.4.2",
+    "mocha": "^6.1.4",
+    "nock": "^10.0.6",
+    "nyc": "^14.1.1",
+    "sinon": "^7.3.2"
   }
 }
