@@ -88,8 +88,7 @@ it("can get course detail", async () => {
     "Listrik dan Magnet",
     "Latihan UAS",
     "Topic 5",
-    "Topic 6",
-    "Topic 7"
+    "Topic 6"
   ]);
 
   expect(courseInfo["General"]).to.deep.equal({
@@ -98,32 +97,41 @@ it("can get course detail", async () => {
       {
         fileType: "Forum",
         link: "https://scele.cs.ui.ac.id/mod/forum/view.php?id=21758",
-        fileName: "Announcements"
+        fileName: "Announcements",
+        comment: ""
       },
       {
         fileType: "File",
         link: "https://scele.cs.ui.ac.id/mod/resource/view.php?id=22146",
-        fileName: "Detail Silabus"
+        fileName: "Detail Silabus",
+        comment: ""
       },
       {
         fileType: "File",
         link: "https://scele.cs.ui.ac.id/mod/resource/view.php?id=22794",
-        fileName: "Update Silabus"
+        fileName: "Update Silabus",
+        comment: ""
       },
       {
         fileType: "Choice",
         link: "https://scele.cs.ui.ac.id/mod/choice/view.php?id=23409",
-        fileName: "Jadwal Asistensi Kelas A"
+        fileName: "Jadwal Asistensi Kelas A",
+        comment: ""
       },
       {
         fileType: "Choice",
         link: "https://scele.cs.ui.ac.id/mod/choice/view.php?id=24468",
-        fileName: "poling asistensi kelas C"
+        fileName: "poling asistensi kelas C",
+        comment: ""
       }
     ]
   });
 
   expect(courseInfo["Latihan UAS"].announcement).to.equal(
     "Silahkan menghadiri kelas tambahan:\nSabtu 13.00 - 15.00 di 3113\nSenin 18.00 - 20.00 di 3113"
+  );
+
+  expect(courseInfo["Latihan UAS"].files[1].comment).to.equal(
+    "Nilai x menjadi 3"
   );
 });

@@ -49,7 +49,11 @@ const fetchContent = ($, contentElement) => {
           .trim(),
         link: $(element)
           .find("a")
-          .attr("href")
+          .attr("href"),
+        comment: $(element)
+          .parent()
+          .find(".contentafterlink")
+          .text()
       });
     });
 

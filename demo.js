@@ -44,6 +44,9 @@ const main = async () => {
       content.files.forEach(file => {
         console.log("> " + c.green(file.fileName) + " (" + file.fileType + ")");
         console.log("  " + file.link);
+        if (file.comment) {
+          console.log("  " + c.yellow(file.comment));
+        }
       });
     }
   });
