@@ -60,7 +60,7 @@ const fetchContent = ($, contentElement) => {
   return { files, announcement };
 };
 
-const fetchInfo = async link => {
+const fetchDetail = async link => {
   const section = {};
 
   const $ = await req(link);
@@ -86,7 +86,7 @@ const updateCourses = $ => {
       link: $(element).attr("href"),
       longTitle: $(element).attr("title"),
       shortTitle: $(element).html(),
-      fetchInfo: () => fetchInfo($(element).attr("href"))
+      fetchDetail: () => fetchDetail($(element).attr("href"))
     });
   });
 };

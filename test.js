@@ -57,21 +57,21 @@ it("can get courses", () => {
   expect(courses[0].link).to.equal(
     "https://scele.cs.ui.ac.id/course/view.php?id=1"
   );
-  expect(courses[0].fetchInfo).to.be.instanceOf(Function);
+  expect(courses[0].fetchDetail).to.be.instanceOf(Function);
 
   expect(courses[1].shortTitle).to.equal("AP-Gasal");
   expect(courses[1].longTitle).to.equal("Advanced Programming");
   expect(courses[1].link).to.equal(
     "https://scele.cs.ui.ac.id/course/view.php?id=2"
   );
-  expect(courses[1].fetchInfo).to.be.instanceOf(Function);
+  expect(courses[1].fetchDetail).to.be.instanceOf(Function);
 
   expect(courses[2].shortTitle).to.equal("Alin-Gasal");
   expect(courses[2].longTitle).to.equal("Aljabar Linier");
   expect(courses[2].link).to.equal(
     "https://scele.cs.ui.ac.id/course/view.php?id=3"
   );
-  expect(courses[2].fetchInfo).to.be.instanceOf(Function);
+  expect(courses[2].fetchDetail).to.be.instanceOf(Function);
 });
 
 it("can get course detail", async () => {
@@ -79,7 +79,7 @@ it("can get course detail", async () => {
     .get("/course/view.php?id=1")
     .reply(200, courseDetail);
 
-  const courseInfo = await courses[0].fetchInfo();
+  const courseInfo = await courses[0].fetchDetail();
 
   expect(Object.keys(courseInfo)).to.deep.equal([
     "General",

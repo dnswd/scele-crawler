@@ -28,8 +28,8 @@ const main = async () => {
     console.log(course.longTitle + " (" + course.shortTitle + ")")
   );
 
-  console.log("=== FETCH INFO ===");
-  const courseInfo = await courses[0].fetchInfo();
+  console.log("=== FETCH DETAIL ===");
+  const courseInfo = await courses[0].fetchDetail();
   Object.keys(courseInfo).forEach(title => {
     console.log(c.bgCyan.black(title));
 
