@@ -34,26 +34,24 @@ const updateProfile = $ => {
 };
 
 const fetchContent = ($, contentElement) => {
-  files = [];
+  content = [];
   $(contentElement)
-    .find(".activityinstance")
+    .find(".activity")
     .each((_, element) => {
-      files.push({
-        fileName: $(element)
+      content.push({
+        title: $(element)
           .find(".instancename")
           .html()
           .split("<")[0],
-        fileType: $(element)
-          .find(".accesshide")
-          .text()
-          .trim(),
         link: $(element)
           .find("a")
           .attr("href"),
         comment: $(element)
-          .parent()
           .find(".contentafterlink")
-          .text()
+          .text(),
+        type: $(element)
+          .attr("class")
+          .split(" ")[1]
       });
     });
 
@@ -61,7 +59,7 @@ const fetchContent = ($, contentElement) => {
     .find(".summary")
     .text();
 
-  return { files, announcement };
+  return { content, announcement };
 };
 
 const fetchDetail = async link => {

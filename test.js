@@ -79,9 +79,9 @@ it("can get course detail", async () => {
     .get("/course/view.php?id=1")
     .reply(200, courseDetail);
 
-  const courseInfo = await courses[0].fetchDetail();
+  const courseDetail = await courses[0].fetchDetail();
 
-  expect(Object.keys(courseInfo)).to.deep.equal([
+  expect(Object.keys(courseDetail)).to.deep.equal([
     "General",
     "Mekanika",
     "Latihan Soal Mekanika",
@@ -91,47 +91,112 @@ it("can get course detail", async () => {
     "Topic 6"
   ]);
 
-  expect(courseInfo["General"]).to.deep.equal({
+  expect(courseDetail["General"]).to.deep.equal({
     announcement: "",
-    files: [
+    content: [
       {
-        fileType: "Forum",
+        type: "forum",
         link: "https://scele.cs.ui.ac.id/mod/forum/view.php?id=21758",
-        fileName: "Announcements",
+        title: "Announcements",
         comment: ""
       },
       {
-        fileType: "File",
+        type: "resource",
         link: "https://scele.cs.ui.ac.id/mod/resource/view.php?id=22146",
-        fileName: "Detail Silabus",
+        title: "Detail Silabus",
         comment: ""
       },
       {
-        fileType: "File",
+        type: "resource",
         link: "https://scele.cs.ui.ac.id/mod/resource/view.php?id=22794",
-        fileName: "Update Silabus",
+        title: "Update Silabus",
         comment: ""
       },
       {
-        fileType: "Choice",
+        type: "choice",
         link: "https://scele.cs.ui.ac.id/mod/choice/view.php?id=23409",
-        fileName: "Jadwal Asistensi Kelas A",
+        title: "Jadwal Asistensi Kelas A",
         comment: ""
       },
       {
-        fileType: "Choice",
+        type: "choice",
         link: "https://scele.cs.ui.ac.id/mod/choice/view.php?id=24468",
-        fileName: "poling asistensi kelas C",
+        title: "poling asistensi kelas C",
         comment: ""
       }
     ]
   });
 
-  expect(courseInfo["Latihan UAS"].announcement).to.equal(
+  expect(courseDetail["Latihan UAS"].announcement).to.equal(
     "Silahkan menghadiri kelas tambahan:\nSabtu 13.00 - 15.00 di 3113\nSenin 18.00 - 20.00 di 3113"
   );
 
-  expect(courseInfo["Latihan UAS"].files[1].comment).to.equal(
-    "Nilai x menjadi 3"
-  );
+  expect(courseDetail["Latihan UAS"].content).to.deep.equal([
+    {
+      title: "Asistensi 1",
+      link: "https://scele.cs.ui.ac.id/mod/resource/view.php?id=27485",
+      comment: "",
+      type: "resource"
+    },
+    {
+      title: "Asistensi 2",
+      link: "https://scele.cs.ui.ac.id/mod/resource/view.php?id=27486",
+      comment: "Nilai x menjadi 3",
+      type: "resource"
+    },
+    {
+      title: "Asistensi 3",
+      link: "https://scele.cs.ui.ac.id/mod/resource/view.php?id=27487",
+      comment: "",
+      type: "resource"
+    },
+    {
+      title: "Asistensi 4",
+      link: "https://scele.cs.ui.ac.id/mod/resource/view.php?id=27488",
+      comment: "",
+      type: "resource"
+    },
+    {
+      title: "Jawaban Asistensi 1 dan 4",
+      link: "https://scele.cs.ui.ac.id/mod/resource/view.php?id=27489",
+      comment: "",
+      type: "resource"
+    },
+    {
+      title: "Jawaban Asistensi 2",
+      link: "https://scele.cs.ui.ac.id/mod/resource/view.php?id=27490",
+      comment: "",
+      type: "resource"
+    },
+    {
+      title: "Jawaban Asistensi 3",
+      link: "https://scele.cs.ui.ac.id/mod/resource/view.php?id=27491",
+      comment: "",
+      type: "resource"
+    },
+    {
+      title: "Announcements",
+      link: "https://scele.cs.ui.ac.id/mod/forum/view.php?id=21758",
+      comment: "",
+      type: "forum"
+    },
+    {
+      title: "Pengumpulan tugas penambahan nilai",
+      link: "https://scele.cs.ui.ac.id/mod/assign/view.php?id=32661",
+      comment: "",
+      type: "assign"
+    },
+    {
+      title: "Tambahan materi",
+      link: "https://scele.cs.ui.ac.id/mod/url/view.php?id=28296",
+      comment: "",
+      type: "url"
+    },
+    {
+      title: "Past Homeworks/Exams",
+      link: "https://scele.cs.ui.ac.id/mod/folder/view.php?id=28302",
+      comment: "",
+      type: "folder"
+    }
+  ]);
 });
