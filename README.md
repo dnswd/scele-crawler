@@ -2,7 +2,7 @@
 
 [![npm package](https://nodei.co/npm/scele-crawler.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/scele-crawler)
 
-![Build Status](https://travis-ci.org/scele-crawler/scele-crawler.svg?branch=master)
+![Build Status](https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&url=https://travis-ci.org/scele-crawler/scele-crawler.svg?branch=master)
 ![Coverage Status](https://coveralls.io/repos/github/scele-crawler/scele-crawler/badge.svg?branch=master)
 ![download status](https://img.shields.io/npm/dt/scele-crawler.svg)
 
