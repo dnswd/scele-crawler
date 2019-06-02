@@ -34,11 +34,11 @@ const updateProfile = $ => {
 };
 
 const fetchContent = ($, contentElement) => {
-  content = [];
+  contents = [];
   $(contentElement)
     .find(".activity")
     .each((_, element) => {
-      content.push({
+      contents.push({
         title: $(element)
           .find(".instancename")
           .html()
@@ -59,7 +59,7 @@ const fetchContent = ($, contentElement) => {
     .find(".summary")
     .text();
 
-  return { content, announcement };
+  return { contents, announcement };
 };
 
 const fetchDetail = async link => {

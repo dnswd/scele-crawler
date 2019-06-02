@@ -6,9 +6,9 @@ const expect = chai.expect;
 const fs = require("fs");
 const sceleCrawler = require("./index");
 
-const homepage = fs.readFileSync("mock/homepage.html");
-const loginFailed = fs.readFileSync("mock/login-failed.html");
-const courseDetail = fs.readFileSync("mock/course-detail.html");
+const mockHomepage = fs.readFileSync("mock/homepage.html");
+const mockLoginFailed = fs.readFileSync("mock/login-failed.html");
+const mockCourseDetail = fs.readFileSync("mock/course-detail.html");
 
 let courses = null;
 
@@ -23,7 +23,7 @@ it("throw error when access broken link", async () => {
 it("throw error when login failed", async () => {
   nock("https://scele.cs.ui.ac.id")
     .post("/login/", { username: "abc", password: "def" })
-    .reply(200, loginFailed);
+    .reply(200, mockLoginFailed);
 
   await expect(sceleCrawler.login("abc", "def")).to.be.rejectedWith(
     "Login failed"
@@ -33,7 +33,7 @@ it("throw error when login failed", async () => {
 it("can login properly", async () => {
   nock("https://scele.cs.ui.ac.id")
     .post("/login/", { username: "abc", password: "def" })
-    .reply(200, homepage);
+    .reply(200, mockHomepage);
 
   await expect(sceleCrawler.login("abc", "def")).to.be.fulfilled;
 });
@@ -77,7 +77,7 @@ it("can get courses", () => {
 it("can get course detail", async () => {
   nock("https://scele.cs.ui.ac.id")
     .get("/course/view.php?id=1")
-    .reply(200, courseDetail);
+    .reply(200, mockCourseDetail);
 
   const courseDetail = await courses[0].fetchDetail();
 
@@ -93,7 +93,7 @@ it("can get course detail", async () => {
 
   expect(courseDetail["General"]).to.deep.equal({
     announcement: "",
-    content: [
+    contents: [
       {
         type: "forum",
         link: "https://scele.cs.ui.ac.id/mod/forum/view.php?id=21758",
@@ -131,7 +131,7 @@ it("can get course detail", async () => {
     "Silahkan menghadiri kelas tambahan:\nSabtu 13.00 - 15.00 di 3113\nSenin 18.00 - 20.00 di 3113"
   );
 
-  expect(courseDetail["Latihan UAS"].content).to.deep.equal([
+  expect(courseDetail["Latihan UAS"].contents).to.deep.equal([
     {
       title: "Asistensi 1",
       link: "https://scele.cs.ui.ac.id/mod/resource/view.php?id=27485",

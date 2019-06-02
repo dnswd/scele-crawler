@@ -61,11 +61,12 @@ Object.keys(courseDetail).forEach(title => {
 console.log(courseDetail[title].announcement);
 ```
 
-### Files
+### Content
 ```js
-courseDetail[title].files.forEach(file => {
-    console.log(file.fileName)
-    console.log(file.fileType);
-    console.log(file.link);
+courseDetail[title].contents.forEach(content => {
+    console.log(content.title)
+    console.log(content.type);
+    console.log(content.link);
+    console.log(content.comment);
 });
 ```

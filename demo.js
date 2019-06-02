@@ -40,12 +40,12 @@ const main = async () => {
       console.log(c.yellow(content.announcement));
     }
 
-    if (content.files.length > 0) {
-      content.files.forEach(file => {
-        console.log("> " + c.green(file.fileName) + " (" + file.fileType + ")");
-        console.log("  " + file.link);
-        if (file.comment) {
-          console.log("  " + c.yellow(file.comment));
+    if (content.contents.length > 0) {
+      content.contents.forEach(content => {
+        console.log("> " + c.green(content.title) + " (" + content.type + ")");
+        console.log("  " + content.link);
+        if (content.comment) {
+          console.log("  " + c.yellow(content.comment));
         }
       });
     }
