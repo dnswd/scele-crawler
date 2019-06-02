@@ -4,7 +4,7 @@ node_js:
   - "8"
 
 after_success:
-  - npm run test:report
+  - yarn test:report
 
 branches:
   only:
