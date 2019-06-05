@@ -36,10 +36,10 @@ console.log(profile.nickName);
 ```js
 const courses = sceleCrawler.getCourses();
 
-courses.forEach(course => {
+for (const course of sceleCrawler.getCourses()) {
     console.log(course.longTitle);
     console.log(course.shortTitle);
-});
+}
 ```
 
 ### Fetch Course Detail
@@ -51,9 +51,9 @@ const courseDetail = await courses[0].fetchDetail();
 
 ### Title
 ```js
-Object.keys(courseDetail).forEach(title => {
-    console.log(title);
-});
+for (const detail of courseDetail) {
+    console.log(detail);
+}
 ```
 
 ### Announcement
@@ -63,10 +63,10 @@ console.log(courseDetail[title].announcement);
 
 ### Content
 ```js
-courseDetail[title].contents.forEach(content => {
+for (const content of courseDetail[title].contents) {
     console.log(content.title)
     console.log(content.type);
     console.log(content.link);
     console.log(content.comment);
-});
+}
 ```
